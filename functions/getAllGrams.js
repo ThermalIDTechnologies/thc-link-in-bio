@@ -28,6 +28,7 @@ function slimUpPosts(response) {
     url: `https://instagram.com/p/${edge.node.shortcode}`,
     caption: edge.node.edge_media_to_caption.edges[0].node.text,
     id: edge.node.id,
+    timestamp: edge.node.taken_at_timestamp,
   }));
 }
 
