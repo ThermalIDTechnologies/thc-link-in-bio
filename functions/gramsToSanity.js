@@ -1,5 +1,5 @@
+require('isomorphic-fetch')
 const sanityClient = require("@sanity/client")
-const fetch = require("node-fetch")
 
 const GRAMS_API_URL =
   "https://thc-link-in-bio.netlify.app/.netlify/functions/getAllGrams"
@@ -64,6 +64,9 @@ exports.handler = async function (event, context, callback) {
   const result = await sendPosts()
   callback(null, {
     statusCode: 200,
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(result),
   })
 }
