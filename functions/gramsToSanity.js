@@ -23,7 +23,7 @@ function transform(ogInsta) {
 
   const dateObject = new Date(milliseconds)
 
-  const humanDateFormat = dateObject.toLocaleString()
+  const humanDateFormat = dateObject.toISOString()
 
   return {
     _id: `imported-insta-${ogInsta.id}`,
