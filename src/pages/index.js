@@ -1,21 +1,58 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 293px));
+  justify-content: center;
+  grid-gap: 3px;
+
+  @media screen and (min-width: 768px) {
+    grid-gap: 1.5rem;
+  }
+`
+
+const IndexPage = ({ data }) => {
+  const instaLinks = data.allSanityInstaLink.nodes
+  console.log(data)
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <Container>
+        {instaLinks.map(instaLink => (
+          <a href={instaLink.postUrl} key={instaLink.id}>
+            <figure style={{ margin: `0` }}>
+              <img
+                src={`https://images.weserv.nl/?url=${encodeURIComponent(
+                  instaLink.thumbnail
+                )}&w=293`}
+                alt={instaLink.timestamp}
+                style={{ margin: `0`, width: `100%`, verticalAlign: `top` }}
+              />
+            </figure>
+          </a>
+        ))}
+      </Container>
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query InstaLinkQuery {
+    allSanityInstaLink(sort: { fields: timestamp, order: DESC }) {
+      nodes {
+        id
+        thumbnail
+        timestamp(formatString: "MMMM Do Y")
+        postUrl
+      }
+    }
+  }
+`
 
 export default IndexPage

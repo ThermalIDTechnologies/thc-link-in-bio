@@ -10,7 +10,19 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
-import "./layout.css"
+import styled from "styled-components"
+import GlobalStyles from './styles/GlobalStyles'
+
+const LayoutContainer = styled.div`
+  margin: 0 auto;
+
+  main {
+    padding-top: 5.5rem;
+    min-height: -moz-calc(100vh - 210px); /* Firefox */
+    min-height: -webkit-calc(100vh -210px); /* Chrome, Safari */
+    min-height: calc(100vh - 210px);
+  }
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,21 +37,14 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <GlobalStyles />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
+      <LayoutContainer>
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        <footer style={{ textAlign: `center`, marginTop: `1rem` }}>
+          <small>© {new Date().getFullYear()}, THC Label Solutions. All Rights Reserved.</small>
         </footer>
-      </div>
+      </LayoutContainer>
     </>
   )
 }

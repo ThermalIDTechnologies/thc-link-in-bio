@@ -1,4 +1,7 @@
 require('isomorphic-fetch')
+require('dotenv').config({
+  path: `.env`,
+})
 const sanityClient = require("@sanity/client")
 
 const GRAMS_API_URL =
@@ -10,11 +13,10 @@ const cache = {
 }
 
 const client = sanityClient({
-  projectId: "dwjuizbv",
-  dataset: "production",
+  projectId: process.env.MY_SANITY_PROJECT_ID,
+  dataset: process.env.MY_SANITY_DATASET,
   // a token with write access
-  token:
-    "skhKpy62VlXy4i8TBTRAs8eNzWWOoxbKXxQtBzpDdmVsslHPDxHjTxv2Apua9mM5UfuALQFvLD0YaLMRkymOiBjBT5bY4dt3b7dNMkXxgxpXlXkk0UvjZJZixUgBRjPZ63vuVBMSzASGslig2l1WrnqvgLqIJmos8O3ilR7gLNnhpXXxRYkA",
+  token: process.env.MY_SANITY_TOKEN,
   useCdn: false,
 })
 
