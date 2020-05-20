@@ -1,5 +1,6 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
+import Image from "gatsby-image"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
@@ -26,7 +27,7 @@ const IndexPage = ({ data }) => {
       <Container>
         {instaLinks.map(instaLink => (
           <a href={instaLink.postUrl} key={instaLink.id}>
-            <figure style={{ margin: `0` }}>
+            {/* <figure style={{ margin: `0` }}>
               <img
                 src={`https://images.weserv.nl/?url=${encodeURIComponent(
                   instaLink.thumbnail
@@ -34,7 +35,8 @@ const IndexPage = ({ data }) => {
                 alt={instaLink.timestamp}
                 style={{ margin: `0`, width: `100%`, verticalAlign: `top` }}
               />
-            </figure>
+            </figure> */}
+            <Image fluid={instaLink.localImage.childImageSharp.fluid} alt={instaLink.timestamp} />
           </a>
         ))}
       </Container>
@@ -47,9 +49,15 @@ export const query = graphql`
     allSanityInstaLink(sort: { fields: timestamp, order: DESC }) {
       nodes {
         id
-        thumbnail
         timestamp(formatString: "MMMM Do Y")
         postUrl
+        localImage {
+          childImageSharp {
+            fluid(maxWidth: 293, quality: 95) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
       }
     }
   }
