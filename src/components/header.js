@@ -20,7 +20,7 @@ const Header = () => (
     <div>
       <nav>
         <small>
-          <a href="https://thclabelsolutions.com">Home</a> > IG Links
+          <a href="https://thclabelsolutions.com">Home</a> > Insta Links
         </small>
       </nav>
       <motion.div

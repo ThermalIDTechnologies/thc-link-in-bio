@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `THC Label Solutions IG Links`,
+    title: `THC Label Solutions Insta Links`,
     description: `@thcsolutionsinc's Instagram posts with informational links to products.`,
     author: `@thcsolutionsinc`,
   },
@@ -42,13 +42,12 @@ module.exports = {
         watchMode: `true`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-remote-images`,
-    //   options: {
-    //     nodeType: 'SanityInstaLink',
-    //     imagePath: 'thumbnail',
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-83589888-1",
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
