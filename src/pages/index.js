@@ -11,22 +11,24 @@ const Container = styled.div`
   grid-template-columns: repeat(3, minmax(100px, 293px));
   justify-content: center;
   grid-gap: 3px;
+  margin: 0 3px;
 
   @media screen and (min-width: 768px) {
     grid-gap: 1.5rem;
+    margin: 0 1.5rem;
   }
 `
 
 const IndexPage = ({ data }) => {
   const instaLinks = data.allSanityInstaLink.nodes
-  console.log(data)
+  console.log(instaLinks)
 
   return (
     <Layout>
       <SEO title="Home" />
       <Container>
         {instaLinks.map(instaLink => (
-          <a href={instaLink.postUrl} key={instaLink.id}>
+          <a href={!!instaLink.productLinks[0] ? instaLink.productLinks[0].productUrl : null} key={instaLink.id}>
             {/* <figure style={{ margin: `0` }}>
               <img
                 src={`https://images.weserv.nl/?url=${encodeURIComponent(
@@ -36,7 +38,10 @@ const IndexPage = ({ data }) => {
                 style={{ margin: `0`, width: `100%`, verticalAlign: `top` }}
               />
             </figure> */}
-            <Image fluid={instaLink.localImage.childImageSharp.fluid} alt={instaLink.timestamp} />
+            <Image
+              fluid={instaLink.thumbnail.asset.fluid}
+              alt={instaLink.caption}
+            />
           </a>
         ))}
       </Container>
@@ -48,13 +53,17 @@ export const query = graphql`
   query InstaLinkQuery {
     allSanityInstaLink(sort: { fields: timestamp, order: DESC }) {
       nodes {
+        caption
         id
         timestamp(formatString: "MMMM Do Y")
         postUrl
-        localImage {
-          childImageSharp {
-            fluid(maxWidth: 293, quality: 95) {
-              ...GatsbyImageSharpFluid_withWebp
+        productLinks {
+          productUrl
+        }
+        thumbnail {
+          asset {
+            fluid(maxWidth: 293) {
+              ...GatsbySanityImageFluid
             }
           }
         }

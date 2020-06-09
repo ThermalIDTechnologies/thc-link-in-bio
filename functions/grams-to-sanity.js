@@ -5,7 +5,7 @@ require('dotenv').config({
 const sanityClient = require("@sanity/client")
 
 const GRAMS_API_URL =
-  "https://thc-link-in-bio.netlify.app/.netlify/functions/getAllGrams"
+  "https://thc-link-in-bio.netlify.app/.netlify/functions/get-some-grams"
 
 const cache = {
   lastFetch: 0,
@@ -30,8 +30,6 @@ function transform(ogInsta) {
   return {
     _id: `imported-insta-${ogInsta.id}`,
     _type: "instaLink",
-    ogImage: ogInsta.ogImage,
-    thumbnail: ogInsta.thumbnail,
     postUrl: ogInsta.url,
     caption: ogInsta.caption,
     timestamp: humanDateFormat,
@@ -50,7 +48,7 @@ async function sendPosts() {
     .then(documents => {
       let transaction = client.transaction()
       documents.forEach(document => {
-        transaction.createOrReplace(document)
+        transaction.createIfNotExists(document)
       })
 
       return transaction.commit()
