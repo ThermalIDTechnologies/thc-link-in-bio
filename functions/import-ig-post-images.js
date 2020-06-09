@@ -14,7 +14,7 @@ const client = sanityClient({
 })
 
 const GRAMS_API_URL =
-  "https://thc-link-in-bio.netlify.app/.netlify/functions/getAllGrams"
+  "https://thc-link-in-bio.netlify.app/.netlify/functions/get-some-grams"
 
 async function getImages() {
   const data = await fetch(GRAMS_API_URL).then(res => res.json())
