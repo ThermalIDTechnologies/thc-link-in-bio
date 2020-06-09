@@ -25,7 +25,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="IG Links" />
+      <SEO title="Insta Links" />
       <Container>
         {instaLinks.map(instaLink => (
           <a href={!!instaLink.productLinks[0] ? instaLink.productLinks[0].productUrl : null} key={instaLink.id}>
