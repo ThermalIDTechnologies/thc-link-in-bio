@@ -38,6 +38,10 @@ export const HeaderContainer = styled(motion.header)`
       margin-left: -90px;
       top: 135%;
       z-index: 10;
+
+       img {
+        width: 180px;
+       }
     }
   }
 `
