@@ -6,7 +6,7 @@ export const HeaderContainer = styled(motion.header)`
   height: 150px;
 
   div {
-    max-width: 1200px;
+    max-width: 950px;
     margin: 0 auto;
     position: relative;
 
@@ -15,7 +15,7 @@ export const HeaderContainer = styled(motion.header)`
 
       small {
         color: #fff;
-        margin: 0.5rem 1rem;
+        margin: 0.5rem;
         flex: 1;
 
         white-space: nowrap;
