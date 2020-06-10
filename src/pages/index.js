@@ -64,6 +64,19 @@ const PageHeader = styled.div`
   }
 `
 
+const IconOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 90%;
+  left: 80%;
+  right: 0;
+  text-align: right;
+
+  span {
+    margin: 0;
+  }
+`
+
 const IndexPage = ({ data }) => {
   const instaLinks = data.allSanityInstaLink.nodes
   console.log(instaLinks)
@@ -106,18 +119,9 @@ const IndexPage = ({ data }) => {
               />
             </a>
             {!!instaLink.productLinks[0] && (
-              <div
-                style={{
-                  position: `absolute`,
-                  top: `0`,
-                  bottom: `90%`,
-                  left: `80%`,
-                  right: `0`,
-                  textAlign: `center`,
-                }}
-              >
-                <p style={{ margin: `0` }}>&#128279;</p>
-              </div>
+              <IconOverlay>
+                <span>&#128279;</span>
+              </IconOverlay>
             )}
           </div>
         ))}
