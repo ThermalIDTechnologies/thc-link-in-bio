@@ -91,28 +91,35 @@ const IndexPage = ({ data }) => {
       </PageHeader>
       <Container>
         {instaLinks.map(instaLink => (
-          <a
-            href={
-              !!instaLink.productLinks[0]
-                ? instaLink.productLinks[0].productUrl
-                : null
-            }
-            key={instaLink.id}
-          >
-            {/* <figure style={{ margin: `0` }}>
-              <img
-                src={`https://images.weserv.nl/?url=${encodeURIComponent(
-                  instaLink.thumbnail
-                )}&w=293`}
-                alt={instaLink.timestamp}
-                style={{ margin: `0`, width: `100%`, verticalAlign: `top` }}
+          <div style={{ position: `relative` }}>
+            <a
+              href={
+                !!instaLink.productLinks[0]
+                  ? instaLink.productLinks[0].productUrl
+                  : null
+              }
+              key={instaLink.id}
+            >
+              <Image
+                fluid={instaLink.thumbnail.asset.fluid}
+                alt={instaLink.caption}
               />
-            </figure> */}
-            <Image
-              fluid={instaLink.thumbnail.asset.fluid}
-              alt={instaLink.caption}
-            />
-          </a>
+            </a>
+            {!!instaLink.productLinks[0] && (
+              <div
+                style={{
+                  position: `absolute`,
+                  top: `0`,
+                  bottom: `90%`,
+                  left: `80%`,
+                  right: `0`,
+                  textAlign: `center`,
+                }}
+              >
+                <p style={{ margin: `0` }}>&#128279;</p>
+              </div>
+            )}
+          </div>
         ))}
       </Container>
     </Layout>
