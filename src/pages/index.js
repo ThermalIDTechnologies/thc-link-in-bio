@@ -72,8 +72,12 @@ const IconOverlay = styled.div`
   right: 0;
   text-align: right;
 
-  span {
-    margin: 0;
+  a {
+    text-decoration: none;
+
+    span {
+      margin: 0;
+    }
   }
 `
 
@@ -120,7 +124,9 @@ const IndexPage = ({ data }) => {
             </a>
             {!!instaLink.productLinks[0] && (
               <IconOverlay>
-                <span>&#128279;</span>
+                <a href={instaLink.productLinks[0].productUrl}>
+                  <span>&#128279;</span>
+                </a>
               </IconOverlay>
             )}
           </div>
